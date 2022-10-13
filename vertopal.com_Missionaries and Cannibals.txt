@@ -1,0 +1,57 @@
+
+
+    missionaries = int(input('Enter number of Missionaries or Cannibales : '))
+    Cannibals = missionaries
+    turn = 0
+    leftCannibals = missionaries
+    leftMissionaries = missionaries
+    rightCannibals = 0
+    rightMissionaries = 0
+
+    while(1):
+        print("current status :")
+        if(turn == 0):
+            print(f"Left side => cannibals : {leftCannibals}, Missionaries : {leftMissionaries}")
+            print("Choose 2 or 1 person to travel from left to right.")
+            person1 = int(input('Number of Missionaries : '))
+            person2 = int(input('Number of cannibals : '))
+            if(person1 == 0 and person2 == 0):
+                print("Wrong input")
+                break
+            if(leftMissionaries<person1 or leftCannibals<person2 or (person1+person2)>2):
+                print("Wrong input")
+                break
+            leftMissionaries -= person1
+            leftCannibals -= person2
+            rightMissionaries += person1
+            rightCannibals += person2
+        else :
+            print(f"Right side => cannibals : {rightCannibals}, Missionaries : {rightMissionaries}")
+            print("Choose 2 or 1 person to travel from right to left. ")
+            person1 = int(input('Number of Missionaries : '))
+            person2 = int(input('Number of cannibals : '))
+            if(person1 == 0 and person2 == 0 ):
+                print("Wrong input")
+                break
+            if(rightMissionaries<person1 or rightCannibals<person2 or (person1+person2)>2):
+                print("Wrong input")
+                break
+            leftMissionaries += person1
+            leftCannibals += person2
+            rightMissionaries -= person1
+            rightCannibals -= person2
+            
+        if((leftCannibals>leftMissionaries and leftMissionaries > 0) or (rightCannibals>rightMissionaries and rightMissionaries > 0)):
+            print("Lost!!")
+            break
+                
+        if(leftCannibals == 0 and leftMissionaries == 0 and rightCannibals == Cannibals and rightMissionaries == Cannibals):
+            print("Success!!")
+            break
+                
+        turn = 1-turn 
+
+    Enter number of Missionaries or Cannibales : 4
+    current status :
+    Left side => cannibals : 4, Missionaries : 4
+    Choose 2 or 1 person to travel from left to right.

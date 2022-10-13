@@ -1,0 +1,63 @@
+
+
+    import copy
+
+    count=0
+    flag=False
+    flag1=False
+    ax=[-1,0,0,1]
+    ay=[0,1,-1,0]
+    n=int(input("Enter the number of rows of the matrix : "))
+    m=int(input("Enter the number of column of the matrix : "))
+    board=[]
+    res=[]
+    for i in range(n):
+        t=[]
+        for j in range(m):
+            t.append(int(input("Enter the element of input matrix : ")))
+        board.append(t)
+    print("Now enter the result matrix of same size")
+    for i in range(n):
+        t=[]
+        for j in range(m):
+            t.append(int(input("Enter the element of input matrix : ")))
+        res.append(t)
+    q=[]
+    s=[]
+
+    q.append(board)
+    s.append(board)
+    while len(q)>0:
+        size=len(q)
+        for _ in range(size):
+            v=q.pop(0)
+            if v==res:
+                print("Answer : ")
+                print(count)
+                flag=True
+            x=0
+            y=0
+            flag1=False
+            for i in range(n):
+                for j in range(m):
+                    if v[i][j]==0:
+                        flag1=True
+                        x=i
+                        y=j
+                        break
+                if flag1 == True:
+                    break
+            for i in range(4):
+                x1=x+ax[i]
+                y1=y+ay[i]
+                if x1>=0 and y1>=0 and x1<n and y1<m:
+                    temp = copy.deepcopy(v)
+                    temp[x][y],temp[x1][y1]=temp[x1][y1],temp[x][y]
+                    if temp not in s:
+                        q.append(temp)
+                        s.append(temp)
+        count=count+1
+        if flag==True:
+            break
+    if flag==False:
+        print("No solution for the input matrix")
